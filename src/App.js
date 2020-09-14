@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 export default function App() {
+
 	const questions = [
 		{
 			questionText: 'What is the capital of France?',
@@ -40,6 +41,19 @@ export default function App() {
 		},
 	];
 
+	const [currentQuestion, setCurrentQuestion] = useState(0);
+
+	const handleAnswerButtonClick = (answerOption) => {
+		const nextQuestion = currentQuestion + 1;
+		setCurrentQuestion(nextQuestion);
+
+		if (nextQuestion < questions.length) {
+			setCurrentQuestion(nextQuestion);
+		} else {
+			alert('you reached the end of the quiz');
+		}
+	};
+
 	return (
 		<div className='app'>
 			{/* HINT: replace "false" with logic to display the 
@@ -52,14 +66,12 @@ export default function App() {
 						<div className='question-count'>
 							<span>Question 1</span>/{questions.length}
 						</div>
-						<div className='question-text'>{questions[0].questionText}</div>
+						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
 					<div className='answer-section'>
-						{questions[0].answerOptions.map((answerOptions, index) =>
-							(
-								<button>{answerOptions.answerText}</button>
-							)
-						)}
+						{questions[currentQuestion].answerOptions.map((answerOption, index) => (
+							<button onClick={() => handleAnswerButtonClick()}>{answerOption.answerText}</button>
+						))}
 					</div>
 				</>
 			)}
