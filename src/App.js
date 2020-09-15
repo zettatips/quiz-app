@@ -42,6 +42,7 @@ export default function App() {
 	];
 
 	const [currentQuestion, setCurrentQuestion] = useState(0);
+	const [showScore, setShowScore] = useState(showScore);
 
 	const handleAnswerButtonClick = (answerOption) => {
 		const nextQuestion = currentQuestion + 1;
@@ -50,7 +51,7 @@ export default function App() {
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
 		} else {
-			alert('you reached the end of the quiz');
+			setShowScore(true);
 		}
 	};
 
@@ -58,7 +59,7 @@ export default function App() {
 		<div className='app'>
 			{/* HINT: replace "false" with logic to display the 
       score when the user has answered all the questions */}
-			{false ? (
+			{showScore ? (
 				<div className='score-section'>You scored 1 out of {questions.length}</div>
 			) : (
 				<>
